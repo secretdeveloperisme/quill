@@ -1,10 +1,32 @@
 // Styles necessary for Quill
-
+// @media screen and (max-width: 767px) for tablet 
+// @media  screen and (max-width: 479px) for mobile
 LIST_STYLE = decimal lower-alpha lower-roman
 LIST_STYLE_WIDTH = 1.2em
 LIST_STYLE_MARGIN = 0.3em
 LIST_STYLE_OUTER_WIDTH = LIST_STYLE_MARGIN + LIST_STYLE_WIDTH
+
+MOBILE_LIST_STYLE_WIDTH = 1rem
+MOBILE_LIST_STYLE_MARGIN = 0.5rem
+MOBILE_LIST_STYLE_OUTER_WIDTH = MOBILE_LIST_STYLE_MARGIN + MOBILE_LIST_STYLE_WIDTH
 MAX_INDENT = 9
+BASE_FONT_SIZE= 1.6rem
+MOBILE_BASE_FONT_SIZE = 1.6rem
+
+.ql-font-roboto 
+  font-family: 'Roboto', sans-serif;
+
+.ql-font-inter 
+  font-family: 'Inter', sans-serif;
+
+.ql-font-lora 
+  font-family: 'Lora', serif;
+
+.ql-font-playfair 
+ font-family: 'Playfair', sans-serif;
+
+.ql-font-jetbrain-mono 
+  font-family: "JetBrains Mono", monospace;
 
 resets(arr)
   unquote('list-' + join(' list-', arr))
@@ -12,7 +34,6 @@ resets(arr)
 .ql-container
   box-sizing: border-box
   font-family: Helvetica, Arial, sans-serif
-  font-size: 13px
   height: 100%
   margin: 0px
   position: relative
@@ -44,12 +65,18 @@ resets(arr)
   height: 100%
   outline: none
   overflow-y: auto
+  overflow-x: hidden;
   padding: 12px 15px
   tab-size: 4
   -moz-tab-size: 4
   text-align: left
   white-space: pre-wrap
   word-wrap: break-word
+  font-size: BASE_FONT_SIZE
+  @media  screen and (max-width: 479px)
+    padding: 0 !important;
+    font-size: 1.6rem;
+
   > *
     cursor: text
 
@@ -68,10 +95,16 @@ resets(arr)
     padding: 2px 5px
   ol
     padding-left: 1.5em
+    @media  screen and (max-width: 479px)
+      margin: 1rem 0 !important;
+      padding-left: 1.3rem !important; 
+      line-height: 1.6; 
   li
     list-style-type: none
     padding-left: LIST_STYLE_OUTER_WIDTH
     position: relative
+    @media  screen and (max-width: 479px)
+      padding-left: MOBILE_LIST_STYLE_OUTER_WIDTH
 
     > .ql-ui:before
       display: inline-block
@@ -124,6 +157,17 @@ resets(arr)
       padding-right: (3*num)em
     li.ql-indent-{num}.ql-direction-rtl.ql-align-right
       padding-right: (3*num + LIST_STYLE_OUTER_WIDTH)em
+    
+    @media  screen and (max-width: 479px)
+      .ql-indent-{num}:not(.ql-direction-rtl)
+        padding-left: (num)rem
+      li.ql-indent-{num}:not(.ql-direction-rtl)
+        padding-left: (num + MOBILE_LIST_STYLE_OUTER_WIDTH)rem
+      .ql-indent-{num}.ql-direction-rtl.ql-align-right
+        padding-right: (num)rem
+      li.ql-indent-{num}.ql-direction-rtl.ql-align-right
+        padding-right: (num+ MOBILE_LIST_STYLE_OUTER_WIDTH)rem
+    
 
   li.ql-direction-rtl
     padding-right: LIST_STYLE_OUTER_WIDTH
@@ -140,7 +184,16 @@ resets(arr)
 
   .ql-code-block-container
     font-family: monospace
-
+    padding-top: 25px !important;
+    @media  screen and (max-width: 479px)
+      position: relative;
+      overflow-x: auto !important;
+      white-space: pre;
+      -webkit-overflow-scrolling: touch;
+  .ql-code-block
+    @media  screen and (max-width: 479px)
+      font-size: 1.3rem !important;
+      line-height: 1.6;
   .ql-video
     display: block
     max-width: 100%
@@ -213,3 +266,6 @@ resets(arr)
   pointer-events: none
   position: absolute
   right: 15px
+
+
+
